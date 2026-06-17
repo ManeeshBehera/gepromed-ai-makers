@@ -1,0 +1,17 @@
+# Render Blueprint — deploys the Gepromed demo as a Next.js web service.
+# In Render: New + → Blueprint → connect this repo/branch. Render reads this file.
+services:
+  - type: web
+    name: gepromed-demo
+    runtime: node
+    plan: free
+    branch: claude/sleepy-maxwell-otfodc
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Where the file-backed registration store is written. On the free plan
+      # the filesystem is ephemeral (resets on redeploy); fine for a demo.
+      - key: DATA_DIR
+        value: /tmp/gepromed-data
