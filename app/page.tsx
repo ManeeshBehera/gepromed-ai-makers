@@ -1,21 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { TrainingCard } from "@/components/TrainingCard";
 import { trainings, isUpcoming } from "@/lib/trainings";
-import { useLang, useT, loc } from "@/lib/i18n";
+import { useLang, useT } from "@/lib/i18n";
+import {
+  VersionSwitcher,
+  HeroSplit,
+  HeroImage,
+  HeroBold,
+  type HomeVersion,
+} from "@/components/HomeHeroes";
+
+const VKEY = "gepromed.homeVersion";
 
 export default function HomePage() {
   const { lang } = useLang();
   const t = useT();
   const upcoming = trainings.filter((x) => isUpcoming(x)).slice(0, 3);
-  const next = upcoming[0];
 
-  const stats: [string, string][] = [
-    ["+1150", lang === "fr" ? "praticiens formés depuis 2018" : "practitioners trained since 2018"],
-    ["96%", t("home.statSat")],
-    ["40+", t("home.statSup")],
-  ];
+  const [v, setVState] = useState<HomeVersion>(1);
+  useEffect(() => {
+    const saved = Number(window.localStorage.getItem(VKEY));
+    if (saved === 1 || saved === 2 || saved === 3) setVState(saved);
+  }, []);
+  const setV = (n: HomeVersion) => {
+    setVState(n);
+    window.localStorage.setItem(VKEY, String(n));
+  };
 
   const specialties = [
     {
@@ -46,69 +59,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-900 to-brand-700 text-white">
-        <div className="absolute inset-0 opacity-20 [background:radial-gradient(60%_60%_at_80%_0%,white,transparent)]" />
-        <div className="container-page relative grid gap-10 py-20 md:grid-cols-2 md:py-28">
-          <div>
-            <span className="pill bg-white/10 text-brand-50 ring-1 ring-white/20">
-              {t("home.eyebrow")}
-            </span>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] text-white sm:text-5xl">
-              {t("home.title")}
-            </h1>
-            <p className="mt-5 max-w-lg text-lg leading-relaxed text-brand-50/90">
-              {t("home.subtitle")}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/trainings" className="btn-accent">
-                {t("home.ctaTrainings")}
-              </Link>
-              <Link
-                href="/about"
-                className="btn border border-white/30 text-white hover:bg-white/10"
-              >
-                {t("home.ctaMission")}
-              </Link>
-            </div>
-            <dl className="mt-12 grid max-w-md grid-cols-3 gap-6">
-              {stats.map(([n, l]) => (
-                <div key={l}>
-                  <dt className="text-2xl font-semibold text-white">{n}</dt>
-                  <dd className="text-xs text-brand-50/80">{l}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+      {/* Design version switcher (demo) */}
+      <VersionSwitcher v={v} setV={setV} />
 
-          <div className="relative hidden md:block">
-            {next && (
-              <div className="absolute right-0 top-1/2 w-full max-w-md -translate-y-1/2 rounded-2xl2 bg-white/95 p-6 text-ink shadow-soft">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand-600">
-                  {t("home.nextSession")}
-                </p>
-                <h3 className="mt-2 text-xl">{loc(next.title, lang)}</h3>
-                <p className="mt-1 text-sm text-ink-muted">
-                  {next.city} · {next.durationDays} {t("detail.days")}
-                </p>
-                <ul className="mt-4 space-y-2 text-sm text-ink-soft">
-                  {next.objectives.slice(0, 3).map((o) => (
-                    <li key={o.en} className="flex gap-2">
-                      <span className="text-brand-500">✓</span> {loc(o, lang)}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/register?session=${next.slug}`}
-                  className="btn-primary mt-5 w-full"
-                >
-                  {t("home.book")}
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      {/* Hero — swappable */}
+      {v === 1 && <HeroSplit />}
+      {v === 2 && <HeroImage />}
+      {v === 3 && <HeroBold />}
 
       {/* Trust strip */}
       <section className="border-b border-slate-100 bg-slate-50">
