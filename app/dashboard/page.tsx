@@ -8,6 +8,7 @@ import {
 } from "@/lib/api";
 import {
   type Registration,
+  type LeadStatus,
   STATUS_FLOW,
   STATUS_LABELS,
   STATUS_TONE,
@@ -15,11 +16,22 @@ import {
 import { getTraining, euro } from "@/lib/trainings";
 import { useLang, useT, loc } from "@/lib/i18n";
 
+type Tab = LeadStatus | "all";
+const TAB_ORDER: Tab[] = [
+  "all",
+  "lead",
+  "deposit_paid",
+  "contract_signed",
+  "confirmed",
+  "cancelled",
+];
+
 export default function DashboardPage() {
   const { lang } = useLang();
   const t = useT();
   const [items, setItems] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState<Tab>("all");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -42,6 +54,28 @@ export default function DashboardPage() {
       .reduce((sum, r) => sum + (getTraining(r.sessionSlug)?.depositEUR ?? 0), 0);
     return { total: items.length, leads, confirmed, deposits };
   }, [items]);
+
+  const counts = useMemo(() => {
+    const c: Record<Tab, number> = {
+      all: items.length,
+      lead: 0,
+      deposit_paid: 0,
+      contract_signed: 0,
+      confirmed: 0,
+      cancelled: 0,
+    };
+    for (const r of items) c[r.status] += 1;
+    return c;
+  }, [items]);
+
+  const visibleTabs = TAB_ORDER.filter(
+    (tb) => tb !== "cancelled" || counts.cancelled > 0,
+  );
+
+  const filtered = useMemo(
+    () => (tab === "all" ? items : items.filter((r) => r.status === tab)),
+    [items, tab],
+  );
 
   async function advance(r: Registration) {
     const idx = STATUS_FLOW.indexOf(r.status);
@@ -85,6 +119,41 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      {/* Stage tabs */}
+      <div className="sticky top-16 z-30 border-b border-slate-100 bg-white/90 backdrop-blur">
+        <div className="container-page flex gap-1 overflow-x-auto py-3">
+          {visibleTabs.map((tb) => {
+            const active = tab === tb;
+            const label =
+              tb === "all"
+                ? lang === "fr"
+                  ? "Toutes"
+                  : "All"
+                : loc(STATUS_LABELS[tb], lang);
+            return (
+              <button
+                key={tb}
+                onClick={() => setTab(tb)}
+                className={`inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
+                  active
+                    ? "bg-brand-600 text-white"
+                    : "text-ink-muted hover:bg-slate-100 hover:text-ink"
+                }`}
+              >
+                {label}
+                <span
+                  className={`rounded-full px-1.5 text-xs font-semibold ${
+                    active ? "bg-white/25 text-white" : "bg-slate-100 text-ink-soft"
+                  }`}
+                >
+                  {counts[tb]}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <section className="container-page py-10">
         <p className="mb-4 text-xs text-ink-muted">{t("dash.demoNote")}</p>
 
@@ -92,9 +161,15 @@ export default function DashboardPage() {
           <p className="py-16 text-center text-ink-muted">{t("common.loading")}</p>
         ) : items.length === 0 ? (
           <p className="py-16 text-center text-ink-muted">{t("dash.empty")}</p>
+        ) : filtered.length === 0 ? (
+          <p className="py-16 text-center text-ink-muted">
+            {lang === "fr"
+              ? "Aucune demande à ce stade."
+              : "No requests at this stage."}
+          </p>
         ) : (
           <div className="space-y-4">
-            {items.map((r) => (
+            {filtered.map((r) => (
               <LeadRow
                 key={r.id}
                 r={r}
