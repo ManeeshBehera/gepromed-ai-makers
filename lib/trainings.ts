@@ -35,6 +35,16 @@ export const SPECIALTY_LABELS: Record<Specialty, L> = {
   simulation: { fr: "Simulation & innovation", en: "Simulation & innovation" },
 };
 
+// Representative imagery per specialty (loaded client-side by the visitor's browser).
+export const SPECIALTY_IMAGE: Record<Specialty, string> = {
+  vascular:
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=70",
+  ophthalmology:
+    "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=1200&q=70",
+  simulation:
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=70",
+};
+
 export const LEVEL_LABELS: Record<Level, L> = {
   Initiation: { fr: "Initiation", en: "Foundation" },
   Advanced: { fr: "Avancé", en: "Advanced" },
