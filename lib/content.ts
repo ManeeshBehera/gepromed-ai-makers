@@ -46,10 +46,9 @@ export const HISTORY: { year: string; title: L; body: L }[] = [
   },
 ];
 
-export const IMPLANT_CYCLE: { n: string; title: L; body: L; icon: string }[] = [
+export const IMPLANT_CYCLE: { n: string; title: L; body: L }[] = [
   {
     n: "01",
-    icon: "🎓",
     title: { fr: "Formation", en: "Training" },
     body: {
       fr: "Apprentissage du geste sur simulateurs et modèles, encadré par des superviseurs experts.",
@@ -58,7 +57,6 @@ export const IMPLANT_CYCLE: { n: string; title: L; body: L; icon: string }[] = [
   },
   {
     n: "02",
-    icon: "🔬",
     title: { fr: "Recherche & développement", en: "Research & development" },
     body: {
       fr: "Évaluation des dispositifs et innovation, en lien avec les industriels et les sociétés savantes.",
@@ -67,7 +65,6 @@ export const IMPLANT_CYCLE: { n: string; title: L; body: L; icon: string }[] = [
   },
   {
     n: "04",
-    icon: "🧪",
     title: { fr: "Analyse d'explants", en: "Explant analysis" },
     body: {
       fr: "Analyse des dispositifs explantés pour comprendre les défaillances et améliorer les pratiques.",
@@ -76,7 +73,6 @@ export const IMPLANT_CYCLE: { n: string; title: L; body: L; icon: string }[] = [
   },
   {
     n: "03",
-    icon: "🛡️",
     title: { fr: "Sécurité du patient", en: "Patient safety" },
     body: {
       fr: "Le retour d'expérience nourrit l'amélioration continue de la sécurité des soins.",

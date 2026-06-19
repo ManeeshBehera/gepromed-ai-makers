@@ -102,7 +102,8 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[...IMPLANT_CYCLE].sort((a, b) => a.n.localeCompare(b.n)).map((c) => (
               <div key={c.n} className="card p-6">
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-2xl">{c.icon}</div>
+                <span className="text-sm font-semibold tracking-wider text-brand-600">{c.n}</span>
+                <div className="mt-3 h-px w-10 bg-brand-200" />
                 <h3 className="mt-4 text-lg">{loc(c.title, lang)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{loc(c.body, lang)}</p>
               </div>

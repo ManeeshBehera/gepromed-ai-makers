@@ -245,9 +245,13 @@ function LeadRow({
             {session ? loc(session.title, lang) : r.sessionTitle}
           </p>
           <p className="mt-0.5 text-xs text-ink-muted">
-            {r.dietary && `🍽 ${r.dietary} · `}
-            {r.needsAccommodation ? "🏨 " : ""}
-            {r.elearningAccess ? "💻 e-learning" : ""}
+            {[
+              r.dietary && `${lang === "fr" ? "Régime" : "Diet"}: ${r.dietary}`,
+              r.needsAccommodation && (lang === "fr" ? "Hébergement" : "Accommodation"),
+              r.elearningAccess && "e-learning",
+            ]
+              .filter(Boolean)
+              .join("  ·  ") || "—"}
           </p>
           <p className="mt-0.5 font-mono text-[11px] text-ink-muted">{r.id}</p>
         </div>

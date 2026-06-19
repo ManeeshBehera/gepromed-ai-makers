@@ -38,7 +38,6 @@ export default function HomePage() {
         "Abords périphériques, techniques endovasculaires, gestion des complications sur modèles perfusés.",
         "Peripheral access, endovascular techniques, complication management on perfused models.",
       ),
-      i: "🩺",
     },
     {
       t: tx("Ophtalmologie", "Ophthalmology"),
@@ -46,7 +45,6 @@ export default function HomePage() {
         "Phacoémulsification et gestes microchirurgicaux sur simulateurs et œil de synthèse.",
         "Phacoemulsification and microsurgical gestures on simulators and synthetic eyes.",
       ),
-      i: "👁️",
     },
     {
       t: tx("Simulation & innovation", "Simulation & innovation"),
@@ -54,13 +52,11 @@ export default function HomePage() {
         "Pédagogie par la simulation, débriefing vidéo et évaluation objective des compétences.",
         "Simulation-based pedagogy, video debriefing and objective skills assessment.",
       ),
-      i: "🧪",
     },
   ];
 
   const why = [
     {
-      i: "🏥",
       t: tx("Plateaux haute-fidélité", "High-fidelity platforms"),
       d: tx(
         "Salles hybrides, simulateurs et modèles perfusés au Centre d'Éducation eXplora à Strasbourg.",
@@ -68,7 +64,6 @@ export default function HomePage() {
       ),
     },
     {
-      i: "👥",
       t: tx("Réseau de superviseurs", "Supervisor network"),
       d: tx(
         "Un réseau européen de chirurgiens experts encadre chaque apprenant, geste après geste.",
@@ -76,7 +71,6 @@ export default function HomePage() {
       ),
     },
     {
-      i: "✅",
       t: tx("Certifié Qualiopi", "Qualiopi certified"),
       d: tx(
         "Indicateurs de satisfaction, taux de réussite et preuves publiés pour chaque session.",
@@ -84,7 +78,6 @@ export default function HomePage() {
       ),
     },
     {
-      i: "🔬",
       t: tx("Ancré dans la recherche", "Rooted in research"),
       d: tx(
         "30 ans d'analyse d'explants et plus de 20 études cliniques nourrissent la pédagogie.",
@@ -140,13 +133,14 @@ export default function HomePage() {
                 key={c.n}
                 className="group relative overflow-hidden rounded-2xl2 border border-slate-100 bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-soft"
               >
-                <span className="absolute -right-2 -top-3 font-display text-6xl font-semibold text-brand-50">
+                <span className="absolute -right-2 -top-3 font-display text-7xl font-semibold text-brand-50">
                   {c.n}
                 </span>
                 <div className="relative">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-2xl">
-                    {c.icon}
-                  </div>
+                  <span className="text-sm font-semibold tracking-wider text-brand-600">
+                    {c.n}
+                  </span>
+                  <div className="mt-3 h-px w-10 bg-brand-200" />
                   <h3 className="mt-4 text-lg">{loc(c.title, lang)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">{loc(c.body, lang)}</p>
                 </div>
@@ -164,11 +158,9 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {specialties.map((s) => (
-              <div key={s.t} className="card p-6">
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-2xl">
-                  {s.i}
-                </div>
-                <h3 className="mt-4 text-lg">{s.t}</h3>
+              <div key={s.t} className="card p-7">
+                <div className="h-1 w-12 rounded-full bg-brand-500" />
+                <h3 className="mt-5 text-xl">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.d}</p>
               </div>
             ))}
@@ -201,10 +193,13 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {why.map((w) => (
+            {why.map((w, i) => (
               <div key={w.t} className="rounded-2xl2 bg-white/5 p-6 ring-1 ring-white/10">
-                <div className="text-3xl">{w.i}</div>
-                <h3 className="mt-3 text-lg text-white">{w.t}</h3>
+                <span className="font-display text-2xl font-semibold text-brand-200/70">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="mt-3 h-px w-10 bg-white/20" />
+                <h3 className="mt-4 text-lg text-white">{w.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-50/80">{w.d}</p>
               </div>
             ))}
