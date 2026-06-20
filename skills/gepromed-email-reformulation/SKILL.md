@@ -83,6 +83,19 @@ default: neutral-professional) · `length` (keep/shorten/expand) · `email_type`
 `signature` (designation if wanted). Never block on optional fields — infer and
 state the assumption in one line.
 
+## Clarification protocol (ask before half-baked output)
+**Intake tier: Minimal.** The email or intent is the input, so this skill usually
+has enough to proceed. Follow the company standard (`skills/CONVENTIONS.md`):
+- **Ask only on genuine ambiguity** that changes the output and cannot be safely
+  inferred or bracketed — e.g. the target language is unclear, the recipient type
+  would materially change the register, or the intent is contradictory.
+- When you must ask, ask **one batched round of at most 3** numbered questions,
+  each with a suggested default, and offer: *"Reply `go` and I'll proceed with the
+  defaults above."*
+- If the input is already clear, **do not ask** — infer, state assumptions in one
+  line, and draft. Never block on optional fields, never re-ask what `MEMORY.md`
+  already answers.
+
 ## Routing logic
 1. Load memory + references.
 2. Detect input language → set output language (mirror unless told).
