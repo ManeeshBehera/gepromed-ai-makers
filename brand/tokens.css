@@ -1,0 +1,20 @@
+/*
+ * Gepromed official brand tokens (CSS custom properties).
+ * Drop into a stylesheet, or copy the values into a skill's design spec.
+ * Canonical core: --gpm-blue (#007AC2) + --gpm-orange (#EC6C17).
+ * Keep orange usage to ~5-10% of any composition.
+ */
+:root {
+  /* Core (canonical) */
+  --gpm-blue: #007AC2;          /* master brand color */
+  --gpm-orange: #EC6C17;        /* accent only ~5-10% */
+
+  /* Blue system */
+  --gpm-blue-secondary: #007CC5; /* hover, gradients, icons */
+  --gpm-blue-tint-soft: #A8D5F2; /* diagrams, secondary UI */
+  --gpm-blue-tint-light: #E1F0F9;/* section backgrounds, cards */
+
+  /* Neutrals */
+  --gpm-white: #FFFFFF;          /* main background */
+  --gpm-text: #1F2A33;           /* body copy */
+}
