@@ -3,6 +3,12 @@
 How a GEPROMED email should sound. This is the difference between a generic
 "professional" rewrite and one that is unmistakably GEPROMED.
 
+## Company voice, not personal voice
+This is GEPROMED's **organizational** house voice. It stays the same regardless
+of which team member runs the skill. Do **not** mirror the sender's personal
+style or quirks — adapt to the *recipient* and to the GEPROMED standard. Every
+email should read as if it came from one consistent, credible institution.
+
 ## The voice in one breath
 Expert, evidence-led, calm, precise, human. A senior scientific professional
 writing to a respected peer. Confident without selling, warm without gushing.

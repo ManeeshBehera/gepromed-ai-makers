@@ -1,73 +1,113 @@
 ---
 name: gepromed-email-reformulation
-description: Reformulate, correct, translate, and re-tone emails and short professional messages into clear, credible, on-brand GEPROMED communication in French or English. Use this skill when the user asks to rewrite, reword, reformulate, clean up, correct, fix, shorten, lengthen, soften, firm up, professionalize, or translate an email, mail, message, reply, follow-up, relance, cold outreach, or short business text — for surgeons, medical-device manufacturers, researchers, institutions, funders, training participants, suppliers, members, or colleagues. Output is a ready-to-review draft with a clear subject line; the human always sends it.
+description: Reformulate, correct, translate, and re-tone emails and short professional messages into clear, credible, on-brand GEPROMED communication in French or English. A company-wide GEPROMED asset — it writes in one consistent organizational house voice for any team member. Use when asked to rewrite, reword, reformulate, clean up, correct, fix, shorten, lengthen, soften, firm up, professionalize, or translate an email, mail, message, reply, follow-up, relance, cold outreach, invitation, thank-you, decline, or short business text — to surgeons, medical-device manufacturers, researchers, institutions, funders, training participants, suppliers, members/donors, or partners. Output is a ready-to-review draft with a subject line; a human always sends it. The skill loads and updates a memory file so it gets closer to GEPROMED house style with every use.
 ---
 
 # GEPROMED — Email Reformulation & Professional Tone
 
 Covers GEPROMED AI needs **#4, #14, #27, #36** (email correction / reformulation
-/ professional tone). Daily use, requested across the whole team (Juliette,
-Wissal, Fanny, Nathalie, and others). Benefit: time saved + professionalism.
+/ professional tone). Used daily across the **whole organization**.
 
-This skill turns a rough, messy, translated, or too-casual email into a clear,
-correct, professional message that sounds like GEPROMED — **an expert,
-evidence-led, non-commercial medical-device safety authority** — without
-inventing any facts. It drafts; a human reviews and sends.
+This is a **company asset**, not a personal tool. It always writes in one
+consistent **GEPROMED house voice** — expert, evidence-led, calm, non-commercial
+— no matter which team member runs it. It turns rough, messy, translated, or
+too-casual text into a clear, correct, professional GEPROMED message **without
+inventing facts**. It drafts; a human reviews and sends.
 
-## Bundled knowledge (read these before writing)
-This skill is self-contained. Ground every output in:
-- `references/brand-guidelines.md` — who GEPROMED is, palette, proof points, do/don't.
-- `references/voice-and-tone.md` — written register, banned hype, FR/EN conventions.
-- `references/recipient-playbook.md` — tone + salutations + closings per audience.
-- `references/examples.md` — worked before→after rewrites (FR and EN).
-- `assets/signature-blocks.md` — standard FR/EN signature blocks (+ bundled logo).
+## Operating principles
+1. **Company voice, not individual voice.** Represent GEPROMED the organization.
+   Do not adapt the *sender's* personal style; adapt to the *recipient* and the
+   GEPROMED house standard. The human who clicks send is "a GEPROMED team member".
+2. **Draft only.** A human reviews and sends. Flag regulated/sensitive content
+   for the responsible role (RQ / DPO / RAF / Direction).
+3. **Memory-driven.** Load `memory/MEMORY.md` first; apply everything in it;
+   update it when you learn something durable (see Memory protocol).
+4. **Self-scoring.** Score the draft against `references/qa-rubric.md`; if below
+   95/100, revise before returning.
+5. **Zero invention.** Never add facts, numbers, certifications, dates, prices,
+   names, or commitments. Unknowns go in `[brackets]` for the sender.
+
+## Bundled knowledge — load in this order
+This skill is self-contained. Before writing, read:
+1. `memory/MEMORY.md` — learned house style, glossary, recurring context, corrections. **Highest priority after explicit user instructions.**
+2. `references/brand-guidelines.md` — who GEPROMED is, palette, proof points, do/don't.
+3. `references/voice-and-tone.md` — register, banned hype, FR/EN conventions.
+4. `references/recipient-playbook.md` — tone + salutations + closings per audience.
+5. `references/glossary-fr-en.md` — approved GEPROMED / medical-device terminology.
+6. `references/email-templates.md` — skeletons per email type.
+7. `references/examples.md` — worked before→after rewrites + anti-patterns.
+8. `references/qa-rubric.md` — the 100-point scoring rubric.
+9. `assets/signature-blocks.md` — standard FR/EN signature blocks (+ bundled logo).
+
+**Priority order when sources conflict:** explicit user instruction > `MEMORY.md`
+> references/brand. Newer beats older; note the change in the memory correction log.
+
+## Memory protocol (makes the skill self-improving)
+The skill must get closer to GEPROMED-correct over time.
+
+- **Load:** At the start of every task, read `memory/MEMORY.md` and apply all
+  stored preferences silently.
+- **Detect a learning** when the team member: (a) corrects your draft, (b) states
+  a durable preference ("always…", "we never say…", "our X is called Y", "sign as
+  …"), (c) gives recurring recipient context (an org, an acronym, a partner), or
+  (d) repeats the same fix twice.
+- **Apply now**, then **record it**:
+  - In a file-writing environment (Claude Code / agent sandbox), run:
+    ```bash
+    python scripts/memory_update.py --section "House-style decisions" \
+      --entry "EN: use 'training' not 'formation'."
+    ```
+    The script appends a dated, de-duplicated entry under the right section.
+  - In a non-writing environment (ChatGPT GPT / Gemini Gem), emit a block:
+    ```
+    📝 MEMORY UPDATE → memory/MEMORY.md  [section: House-style decisions]
+    - EN: use "training" not "formation".
+    ```
+    and tell the team member to paste it back into the knowledge file.
+- **Confirm** in one short line ("Noted for next time: …") so it is transparent.
+- **Conflict:** a new instruction overrides memory; log it under "Correction log".
+- **Never** store secrets, passwords, patient-identifying data, or one-off facts
+  that are not durable preferences.
 
 ## When to use
 - "Reformule / corrige / nettoie ce mail." · "Rends ça plus professionnel / plus court."
 - "Rewrite this email." · "Make this firmer / warmer / shorter." · "Translate and adapt for a partner."
-- Drafting a reply, a follow-up (relance), or a short outreach message.
+- Drafting a reply, follow-up (relance), invitation, thank-you, decline, or short outreach.
 
 ## Inputs
-**Required:** the raw email/message text.
-**Optional (ask only if it changes the output):**
-- `language`: FR or EN (default: mirror the input language).
-- `recipient_type`: surgeon/HCP · manufacturer · researcher · institution/funder ·
-  training participant · supplier · member/donor · colleague (default: infer).
-- `tone`: neutral · warm · firm · formal (default: neutral-professional).
-- `length`: keep · shorten · expand (default: keep, but tighten).
-- `signature`: name + designation if a signature block is wanted.
+**Required:** the raw email/message text (or the intent, for a from-scratch draft).
+**Optional (ask only if it changes the output):** `language` (FR/EN, default: mirror
+input) · `recipient_type` (default: infer) · `tone` (neutral/warm/firm/formal,
+default: neutral-professional) · `length` (keep/shorten/expand) · `email_type`
+(reply/relance/invitation/thank-you/decline/scheduling/info-request/bad-news) ·
+`signature` (designation if wanted). Never block on optional fields — infer and
+state the assumption in one line.
 
-If both language and tone are missing, infer them and state the assumption in one
-line above the draft. Never block on missing optional fields.
+## Routing logic
+1. Load memory + references.
+2. Detect input language → set output language (mirror unless told).
+3. Classify `recipient_type` and `email_type`; pull the matching template
+   (`email-templates.md`) and playbook entry (`recipient-playbook.md`).
+4. Extract and preserve all facts; mark unknowns as `[brackets]`.
+5. Draft using the template skeleton + house voice + glossary terms.
+6. Run the brand-voice linter mentally (or via script); fix all errors.
+7. Self-score with the QA rubric; if < 95, revise.
+8. Detect any memory learnings; apply + record + confirm.
+9. Return in the output format.
 
-## Workflow
-1. **Detect language** of the input; reply in the same language unless told otherwise.
-2. **Preserve intent and every fact.** Never add or alter facts, figures,
-   certifications, dates, prices, names, or commitments. Anything that needs a
-   human decision goes in `[brackets]`.
-3. **Fix** spelling, grammar, and awkward/translated phrasing.
-4. **Apply the recipient playbook** (`references/recipient-playbook.md`) for tone,
-   salutation, and closing.
-5. **Structure:** concise subject · short greeting · 1–3 tight paragraphs or
-   bullets · one explicit ask / next step · professional closing · optional
-   signature block from `assets/signature-blocks.md`.
-6. **Apply the voice rules** (`references/voice-and-tone.md`): expert, calm, no
-   hype, no emojis in formal mail, varied sentence rhythm so it does not read AI-generated.
-7. **Self-check** against the quality rules below (optionally run the linter).
-
-## Optional deterministic check
-A bundled linter flags hype words, emojis in formal mail, missing subject, and
-over-long sentences. Run it on your drafted body to catch brand-voice slips:
+## Deterministic helpers
 ```bash
+# Brand-voice lint (hype, emojis in formal mail, missing subject/ask, long sentences)
 python scripts/brand_voice_check.py --file draft.txt --lang fr
-# or pipe text:  echo "<draft>" | python scripts/brand_voice_check.py --lang en
+echo "<draft>" | python scripts/brand_voice_check.py --lang en
+
+# Append a learned preference to memory
+python scripts/memory_update.py --section "Glossary additions" --entry "Satellite = internal GEPROMED software (do not translate)."
 ```
-It prints a PASS/FAIL report with line-level flags. The model still owns the
-final judgment; the linter is a safety net, not a gate that rewrites text.
 
 ## Output format
 ```
-Assumptions: <language / tone — only if inferred>     ← omit if all given
+Assumptions: <language / tone / type — only if inferred>     ← omit if all given
 
 Subject: <concise, specific subject>
 
@@ -76,18 +116,20 @@ Subject: <concise, specific subject>
 <optional signature block>
 
 Notes: <facts/decisions the sender must confirm before sending>   ← omit if none
+QA: <score>/100                                                   ← internal check, keep ≥95
+Noted for next time: <one line>                                   ← only if memory updated
 ```
 Offer one tighter alternative under `--- Shorter version ---` when length matters.
 
-## Quality rules
+## Quality rules (non-negotiable)
 - Same intent, **zero invented facts**; uncertainties in `[brackets]`.
 - Correct language, grammar, register; reads human, not machine-generated.
 - Clear subject + one explicit ask / next step.
 - No hype, no superlatives-without-proof, no emojis in formal mail, no salesy tone.
 - Neutral and independent — GEPROMED sits between clinicians and industry.
-- **The human sends. This skill only drafts.** Flag regulated/sensitive content
-  (patient data, contracts, pricing, regulatory claims) for human review.
+- Consistent GEPROMED house voice across every team member and every send.
+- **The human sends. This skill only drafts.**
 
-## Brand constants (for any signature/visual element)
-- Primary blue `#007AC2` · Accent orange `#EC6C17` (rare, ≤10%) · Dark text
-  `#1F2A33` · Muted text `#5F6B73`. Do not overuse orange — the logo carries it.
+## Brand constants (signatures / visual elements)
+Primary blue `#007AC2` · Accent orange `#EC6C17` (rare, ≤10%) · Dark text
+`#1F2A33` · Muted text `#5F6B73`. Do not overuse orange — the logo carries it.

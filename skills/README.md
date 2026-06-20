@@ -20,22 +20,30 @@ language request.
 
 ## Package anatomy (gold standard)
 
-Each skill is a **self-contained, brand-loaded package** — not a thin prompt:
+Each skill is a **self-contained, brand-loaded, self-improving package** — not a
+thin prompt. Every skill is a **company asset**: it writes in one consistent
+GEPROMED house voice for any team member (not a personal tool).
 
 ```
 <skill-name>/
-├── SKILL.md                 # Claude Agent Skill: trigger-rich description, workflow,
-│                            #   output spec, quality rules, brand constants
+├── SKILL.md                 # Claude Agent Skill: trigger-rich description, routing logic,
+│                            #   memory protocol, workflow, output spec, brand constants
 ├── agents/openai.yaml       # cross-platform manifest (ChatGPT/Gemini display + examples)
 ├── references/              # bundled knowledge: scoped brand guidelines, voice & tone,
-│                            #   domain playbooks, worked FR/EN examples
+│                            #   recipient playbook, FR↔EN glossary, type templates,
+│                            #   worked FR/EN examples, 100-pt QA rubric
+├── memory/MEMORY.md         # self-updating house-style memory: loaded first, appended
+│                            #   to as the team corrects it — converges toward correct
 ├── assets/                  # real brand assets (logo, fonts, base templates, signatures)
-├── scripts/                 # deterministic helpers that DO the work / enforce the brand
-└── instructions-portable.md # paste-able build notes for a ChatGPT GPT or Gemini Gem
+├── scripts/                 # deterministic helpers: brand-voice lint, memory updater,
+│                            #   artifact generators (for script-backed skills)
+└── instructions-portable.md # paste-able build + knowledge-upload steps for ChatGPT/Gemini
 ```
 
-Skills must be self-contained on upload, so each bundles its **own** brand
-reference (the repo-root `/brand` kit is the master source, mirrored per skill).
+Skills are self-contained on upload (each bundles its **own** brand reference;
+the repo-root `/brand` kit is the master source, mirrored per skill). Each skill
+**self-scores ≥95/100** against its QA rubric before returning output, and
+**learns over time** via its memory file.
 
 ## The 16 skills
 
