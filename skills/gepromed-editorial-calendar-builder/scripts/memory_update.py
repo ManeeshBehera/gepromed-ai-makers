@@ -13,7 +13,7 @@ Usage:
         --reason "Team correction on 2026-06-20"
 
 Sections (must match a heading in MEMORY.md):
-    Glossary additions | House-style decisions | Recurring recipients & context |
+    Cadence & slots | Recurring themes & events | House-style decisions |
     Approved phrasings / snippets | Do / Don't learned
 
 The Correction log is always updated. Exit 0 on success, 2 on bad input.
@@ -28,9 +28,9 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_MEMORY = SCRIPT_DIR.parent / "memory" / "MEMORY.md"
 
 VALID_SECTIONS = [
-    "Glossary additions",
+    "Cadence & slots",
+    "Recurring themes & events",
     "House-style decisions",
-    "Recurring recipients & context",
     "Approved phrasings / snippets",
     "Do / Don't learned",
 ]

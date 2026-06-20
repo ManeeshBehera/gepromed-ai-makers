@@ -1,9 +1,8 @@
-# GEPROMED brand guidelines (for written communication)
+# GEPROMED brand guidelines (for ISO gap analysis)
 
-Scoped brand reference bundled with the Training Admin Doc Pack skill. Ground every
-generated artifact (attendance sheet, badges, RGPD notice — colors, logo, typography)
-in this. Full master kit lives in the repo `/brand`, but this file makes the skill
-self-sufficient on upload.
+Scoped brand reference bundled with the ISO Gap Analysis skill. Ground every
+gap analysis and update summary in this. Full master kit lives in the repo
+`/brand`, but this file makes the skill self-sufficient on upload.
 
 ## Brand essence
 GEPROMED is **the medical-device hub for patient safety** — a non-profit

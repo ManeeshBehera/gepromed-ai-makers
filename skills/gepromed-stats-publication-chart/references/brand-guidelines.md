@@ -1,9 +1,8 @@
-# GEPROMED brand guidelines (for written communication)
+# GEPROMED brand guidelines (for statistics & publication charts)
 
-Scoped brand reference bundled with the Training Admin Doc Pack skill. Ground every
-generated artifact (attendance sheet, badges, RGPD notice — colors, logo, typography)
-in this. Full master kit lives in the repo `/brand`, but this file makes the skill
-self-sufficient on upload.
+Scoped brand reference bundled with the Statistics & Publication Chart skill.
+Ground every figure and summary in this. Full master kit lives in the repo
+`/brand`, but this file makes the skill self-sufficient on upload.
 
 ## Brand essence
 GEPROMED is **the medical-device hub for patient safety** — a non-profit
