@@ -50,8 +50,11 @@ BAD_OPENERS = [
 # Heuristic markers of an explicit ask / next step.
 ASK_MARKERS = [
     "?", "could you", "would you", "please", "kindly", "let me know",
+    "would welcome", "would be glad to", "would be happy to", "look forward to",
+    "at your convenience", "i would appreciate",
     "pourriez-vous", "pouvez-vous", "merci de", "veuillez", "confirmez",
     "n'hésitez pas", "je reste à votre disposition", "prochaine étape", "next step",
+    "à votre convenance", "dans l'attente",
 ]
 
 EMOJI_RE = re.compile(
