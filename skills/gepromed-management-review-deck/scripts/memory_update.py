@@ -7,13 +7,13 @@ This is how the skill "gets closer to correct over time".
 
 Usage:
     python memory_update.py --section "House-style decisions" \
-        --entry "EN: use 'training' not 'formation'."
-    python memory_update.py --section "Glossary additions" \
-        --entry "Satellite = internal GEPROMED software (do not translate)." \
-        --reason "Team correction on 2026-06-20"
+        --entry "EN: title slide reads 'Management Review — [period]'."
+    python memory_update.py --section "Approved QMS facts" \
+        --entry "KPI names: training satisfaction, conformity rate, turnaround time." \
+        --reason "RQ confirmation on 2026-06-20"
 
 Sections (must match a heading in MEMORY.md):
-    Glossary additions | House-style decisions | Recurring recipients & context |
+    Approved QMS facts | House-style decisions | Recurring recipients & context |
     Approved phrasings / snippets | Do / Don't learned
 
 The Correction log is always updated. Exit 0 on success, 2 on bad input.
@@ -28,7 +28,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_MEMORY = SCRIPT_DIR.parent / "memory" / "MEMORY.md"
 
 VALID_SECTIONS = [
-    "Glossary additions",
+    "Approved QMS facts",
     "House-style decisions",
     "Recurring recipients & context",
     "Approved phrasings / snippets",
