@@ -1,8 +1,9 @@
 # GEPROMED brand guidelines (for written communication)
 
-Scoped brand reference bundled with the Email Reformulation skill. Ground every
-email in this. Full master kit lives in the repo `/brand`, but this file makes
-the skill self-sufficient on upload.
+Scoped brand reference bundled with the Branded Template Library skill. Ground
+every generated template (letter, report, presentation, email — colors, logo,
+typography, voice) in this. Full master kit lives in the repo `/brand`, but this
+file makes the skill self-sufficient on upload.
 
 ## Brand essence
 GEPROMED is **the medical-device hub for patient safety** — a non-profit
