@@ -57,43 +57,43 @@ before generating · **Light** = ask only for missing required fields · **Minim
 ### Document & template generation
 | # | Skill | Needs | Intake | Validator | Status |
 |---|---|---|---|---|---|
-| 1 | `gepromed-qualiopi-program-generator` | #9 | Full | RQ / Qualiopi | ⬜ |
-| 2 | `gepromed-training-admin-doc-pack` | #10 | Light | DPO | ⬜ |
-| 3 | `gepromed-branded-template-library` | #7 | Full | — | ⬜ |
-| 4 | `gepromed-elearning-module-structurer` | #25 | Full | — | ⬜ |
+| 1 | `gepromed-qualiopi-program-generator` | #9 | Full | RQ / Qualiopi | ✅ |
+| 2 | `gepromed-training-admin-doc-pack` | #10 | Light | DPO | ✅ |
+| 3 | `gepromed-branded-template-library` | #7 | Full | — | ✅ |
+| 4 | `gepromed-elearning-module-structurer` | #25 | Full | — | ✅ |
 
 ### Communication & content
 | # | Skill | Needs | Intake | Validator | Status |
 |---|---|---|---|---|---|
-| 5 | `gepromed-linkedin-post-drafter` | #1, #8 | Full | Comms | ⬜ |
-| 6 | `gepromed-editorial-calendar-builder` | #2 | Full | Comms | ⬜ |
-| 7 | `gepromed-infographic-spec-generator` | #3, #15 | Full | — | ⬜ |
+| 5 | `gepromed-linkedin-post-drafter` | #1, #8 | Full | Comms | ✅ |
+| 6 | `gepromed-editorial-calendar-builder` | #2 | Full | Comms | ✅ |
+| 7 | `gepromed-infographic-spec-generator` | #3, #15 | Full | — | ✅ |
 | 8 | `gepromed-email-reformulation` | #4, #14, #27, #36 | Minimal | — | ✅ gold standard |
-| 9 | `gepromed-website-content-generator` | #24 | Full | Comms | ⬜ |
-| 10 | `gepromed-scientific-writing-summarizer` | #5, #26, #28 | Full* (summary = Minimal) | Author / RQ | ⬜ |
+| 9 | `gepromed-website-content-generator` | #24 | Full | Comms | ✅ |
+| 10 | `gepromed-scientific-writing-summarizer` | #5, #26, #28 | Full* (summary = Minimal) | Author / RQ | ✅ |
 
 ### Prospecting (drafting only, not a CRM)
 | # | Skill | Needs | Intake | Validator | Status |
 |---|---|---|---|---|---|
-| 11 | `gepromed-prospect-outreach-drafter` | #6, #16 | Full | — | ⬜ |
+| 11 | `gepromed-prospect-outreach-drafter` | #6, #16 | Full | — | ✅ |
 
 ### Data analysis
 | # | Skill | Needs | Intake | Validator | Status |
 |---|---|---|---|---|---|
-| 12 | `gepromed-stats-publication-chart` | #19, #20 | Light | Scientific | ⬜ |
+| 12 | `gepromed-stats-publication-chart` | #19, #20 | Light | Scientific | ✅ |
 
 ### Compliance & quality drafting
 | # | Skill | Needs | Intake | Validator | Status |
 |---|---|---|---|---|---|
-| 13 | `gepromed-rgpd-document-drafter` | #22 | Full | DPO | ⬜ |
-| 14 | `gepromed-iso-gap-analysis` | #38, #39 | Light* (gap = Minimal) | RQ | ⬜ |
-| 15 | `gepromed-management-review-deck` | #40, #41 | Full* (minutes = Minimal) | RQ | ⬜ |
-| 16 | `gepromed-hr-drafting` | #43, #44 | Full | RAF | ⬜ |
+| 13 | `gepromed-rgpd-document-drafter` | #22 | Full | DPO | ✅ |
+| 14 | `gepromed-iso-gap-analysis` | #38, #39 | Light* (gap = Minimal) | RQ | ✅ |
+| 15 | `gepromed-management-review-deck` | #40, #41 | Full* (minutes = Minimal) | RQ | ✅ |
+| 16 | `gepromed-hr-drafting` | #43, #44 | Full | RAF | ✅ |
 
-**Build order:** `gepromed-email-reformulation` is the ✅ **gold-standard exemplar**
-— all other skills are built to this exact bar (now incl. naming + clarification).
-Next per the recommended first batch: `gepromed-branded-template-library` →
-`gepromed-linkedin-post-drafter` + `gepromed-editorial-calendar-builder`.
+**Status: all 16 built, audited, and pressure-tested** to the
+`gepromed-email-reformulation` gold-standard bar. Every package passes the
+completeness, structure/naming, script-execution, and guardrail gates — see
+[`VERIFICATION.md`](VERIFICATION.md) for the full report.
 
 ## Out of scope (section 2 — not skills)
 
