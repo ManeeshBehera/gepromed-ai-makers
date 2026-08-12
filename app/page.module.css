@@ -32,7 +32,7 @@
   color-scheme: light;
   background: var(--canvas);
   color: var(--ink);
-  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 14px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
@@ -66,21 +66,6 @@
 }
 .wrap * { box-sizing: border-box; }
 .mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
-
-/* The site's global base styles pin h1-h4 to a fixed light-mode color and a
- * display serif font (see app/globals.css). Those are explicit per-element
- * rules, so they beat this wrapper's inherited `color`/`font-family` even
- * though .wrap sets its own theme tokens. Reset them back to this design
- * system's own type before any of the component rules below run (later,
- * more specific rules — .pageHead h1 etc. — still win on size/spacing). */
-.wrap :global(h1),
-.wrap :global(h2),
-.wrap :global(h3),
-.wrap :global(h4) {
-  color: inherit;
-  font-family: inherit;
-  letter-spacing: inherit;
-}
 
 .app { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100vh; }
 .sidebar { position: sticky; top: 0; height: 100vh; background: var(--surface); border-right: 1px solid var(--line); padding: 18px 14px; display: flex; flex-direction: column; z-index: 30; }

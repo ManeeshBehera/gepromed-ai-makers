@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LanguageProvider } from "@/lib/i18n";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Gepromed — Plateforme de formation chirurgicale",
+  title: "GEO Command Center — Gepromed",
   description:
-    "Gepromed forme les chirurgiens de demain en chirurgie vasculaire et ophtalmologie. Plateforme de référence en France et en Europe, certifiée Qualiopi.",
+    "AI-visibility, citations and organic-search reporting for Gepromed — Profound, Ahrefs and Google Search Console in one workspace.",
 };
 
 export default function RootLayout({
@@ -16,14 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
-      <body className="flex min-h-screen flex-col">
-        <LanguageProvider>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </LanguageProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

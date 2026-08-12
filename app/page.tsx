@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import styles from "./organic.module.css";
+import styles from "./page.module.css";
 import {
   META,
   LEADERBOARD,
@@ -203,8 +203,8 @@ export default function OrganicReportingPage() {
             <button className={styles.themeButton} onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}>
               Switch theme
             </button>
-            <a className={styles.legacyLink} href="/dashboard">
-              Organizer space →
+            <a className={styles.legacyLink} href="https://gepromed.com" target="_blank" rel="noreferrer">
+              gepromed.com ↗
             </a>
           </div>
         </aside>
