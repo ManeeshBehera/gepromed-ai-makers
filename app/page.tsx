@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./page.module.css";
+import { CommandShell, type NavTab } from "@/components/shell/CommandShell";
+import { Kpi, CardTitle, SectionTitle, num, pct } from "@/components/shell/dashboardUI";
 import {
   META,
   LEADERBOARD,
@@ -34,7 +36,7 @@ import {
 } from "@/lib/organicData";
 
 type TabId = "overview" | "visibility" | "citations" | "competitors" | "organic";
-const TABS: { id: TabId; label: string; short: string }[] = [
+const TABS: NavTab[] = [
   { id: "overview", label: "Overview", short: "OV" },
   { id: "visibility", label: "AI Visibility", short: "AI" },
   { id: "citations", label: "Citations", short: "CI" },
@@ -42,122 +44,8 @@ const TABS: { id: TabId; label: string; short: string }[] = [
   { id: "organic", label: "Organic & Search", short: "OR" },
 ];
 
-const num = (n: number) => n.toLocaleString("en-US");
-const pct = (n: number, digits = 1) => `${n.toFixed(digits)}%`;
-
-function Sparkline({ values, tone }: { values: number[]; tone?: "teal" | "green" | "orange" }) {
-  const nums = values.filter((v) => Number.isFinite(v));
-  if (nums.length < 2) return null;
-  const min = Math.min(...nums);
-  const max = Math.max(...nums);
-  const range = max - min || 1;
-  const W = 100;
-  const H = 34;
-  const pts = nums.map((v, i) => [(i / (nums.length - 1)) * W, H - 3 - ((v - min) / range) * (H - 8)]);
-  const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(" ");
-  const last = pts[pts.length - 1];
-  const toneClass =
-    tone === "teal" ? styles.kpiChartTeal : tone === "green" ? styles.kpiChartGreen : tone === "orange" ? styles.kpiChartOrange : "";
-  return (
-    <div className={`${styles.kpiChart} ${toneClass}`} aria-hidden="true">
-      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none">
-        <path className={styles.area} d={`${line} L${W} ${H} L0 ${H} Z`} />
-        <path className={styles.line} d={line} vectorEffect="non-scaling-stroke" />
-      </svg>
-    </div>
-  );
-}
-
-function Kpi({
-  label,
-  value,
-  sub,
-  tone = "good",
-  delta = "Live",
-  series,
-  sparkTone,
-}: {
-  label: string;
-  value: string;
-  sub: string;
-  tone?: "good" | "warn" | "bad";
-  delta?: string;
-  series?: number[];
-  sparkTone?: "teal" | "green" | "orange";
-}) {
-  const deltaClass = tone === "good" ? styles.deltaGood : tone === "warn" ? styles.deltaWarn : styles.deltaBad;
-  return (
-    <article
-      className={`${styles.card} ${styles.kpi}`}
-      data-search={`${label} ${value} ${sub}`.toLowerCase()}
-    >
-      <div className={styles.kpiLabel}>{label}</div>
-      <div className={styles.kpiValue}>{value}</div>
-      {series ? <Sparkline values={series} tone={sparkTone} /> : null}
-      <div className={styles.kpiFoot}>
-        <span className={`${styles.delta} ${deltaClass}`}>{delta}</span>
-        <div className={styles.kpiSub}>{sub}</div>
-      </div>
-    </article>
-  );
-}
-
-function CardTitle({ title, sub, badge }: { title: string; sub?: string; badge?: string }) {
-  return (
-    <div className={styles.cardHead}>
-      <div>
-        <h3>{title}</h3>
-        {sub ? <p>{sub}</p> : null}
-      </div>
-      {badge ? <span className={`${styles.badge} ${styles.badgeNeutral}`}>{badge}</span> : null}
-    </div>
-  );
-}
-
-function SectionTitle({ title, sub }: { title: string; sub?: string }) {
-  return (
-    <div className={styles.sectionTitle}>
-      <div>
-        <h2>{title}</h2>
-        {sub ? <p>{sub}</p> : null}
-      </div>
-    </div>
-  );
-}
-
 export default function OrganicReportingPage() {
   const [tab, setTab] = useState<TabId>("overview");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [query, setQuery] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem("gepromed-geo-theme");
-    if (saved === "dark" || saved === "light") setTheme(saved);
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("gepromed-geo-theme", theme);
-  }, [theme]);
-
-  // Same in-page filter pattern as the reference hub: every [data-search] card
-  // in the active tab gets hidden unless it matches the query.
-  useEffect(() => {
-    const root = contentRef.current;
-    if (!root) return;
-    const q = query.trim().toLowerCase();
-    const nodes = Array.from(root.querySelectorAll<HTMLElement>("[data-search]"));
-    let shown = 0;
-    nodes.forEach((el) => {
-      if (el.parentElement?.closest("[data-search]")) return;
-      const hit = !q || (el.getAttribute("data-search") || "").includes(q);
-      el.hidden = !hit;
-      if (hit) shown++;
-    });
-    const empty = root.querySelector<HTMLElement>("[data-noresults]");
-    if (empty) empty.hidden = !(q && nodes.length > 0 && shown === 0);
-  }, [tab, query]);
 
   const leaderboardMax = useMemo(() => Math.max(...LEADERBOARD.map((r) => r.visibility)), []);
   const topicMax = useMemo(() => Math.max(...TOPICS.map((t) => t.visibility)), []);
@@ -165,88 +53,26 @@ export default function OrganicReportingPage() {
   const gapTopic = TOPICS.find((t) => t.visibility === 0);
 
   return (
-    <div className={styles.wrap} data-theme={theme}>
-      <div className={styles.app}>
-        <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
-          <div className={styles.brand}>
-            <div className={styles.brandMark}>G</div>
-            <div>
-              <strong>GEO Command</strong>
-              <span>Gepromed · Organic reporting</span>
-            </div>
-          </div>
-          <div className={styles.navTitle}>Workspace</div>
-          <nav className={styles.nav} aria-label="Workspace sections">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                className={`${styles.navBtn} ${tab === t.id ? styles.navBtnOn : ""}`}
-                onClick={() => {
-                  setTab(t.id);
-                  setSidebarOpen(false);
-                }}
-                aria-current={tab === t.id ? "page" : undefined}
-              >
-                <span className={styles.navIcon}>{t.short}</span>
-                <span>{t.label}</span>
-              </button>
-            ))}
-          </nav>
-          <div className={styles.sidebarFoot}>
-            <div className={styles.missionCard}>
-              <div className={styles.eyebrow}>Mission window</div>
-              <strong>{META.mission}</strong>
-              <span>
-                {META.market} · updated {META.updated}
-              </span>
-            </div>
-            <button className={styles.themeButton} onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}>
-              Switch theme
-            </button>
-            <a className={styles.legacyLink} href="https://gepromed.com" target="_blank" rel="noreferrer">
-              gepromed.com ↗
-            </a>
-          </div>
-        </aside>
-
-        <main className={styles.main}>
-          <header className={styles.topbar}>
-            <button className={styles.mobileMenu} onClick={() => setSidebarOpen((v) => !v)} aria-label="Open navigation">
-              Menu
-            </button>
-            <label className={styles.search}>
-              <input
-                type="search"
-                aria-label="Search the current workspace"
-                placeholder="Search the current workspace..."
-                autoComplete="off"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </label>
-            <div className={styles.topSpacer} />
-            <div className={styles.status}>
-              <i className={styles.statusDot} />
-              <span>Profound · {META.updated}</span>
-            </div>
-            <button className={styles.topAction} aria-label="Switch theme" onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))} title="Switch theme">
-              {theme === "dark" ? "☀" : "☾"}
-            </button>
-          </header>
-
-          <div className={styles.content} ref={contentRef}>
-            {tab === "overview" && <Overview leaderboardMax={leaderboardMax} gapTopic={gapTopic} />}
-            {tab === "visibility" && <Visibility modelMax={modelMax} topicMax={topicMax} />}
-            {tab === "citations" && <Citations />}
-            {tab === "competitors" && <Competitors leaderboardMax={leaderboardMax} />}
-            {tab === "organic" && <Organic />}
-            <div className={`${styles.card} ${styles.empty}`} data-noresults hidden>
-              Nothing on this page matches &ldquo;{query}&rdquo;.
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
+    <CommandShell
+      brandTitle="GEO Command"
+      brandSubtitle="Gepromed · Organic reporting"
+      tabs={TABS}
+      activeTab={tab}
+      onTabChange={(id) => setTab(id as TabId)}
+      missionLabel={META.mission}
+      missionMeta={`${META.market} · updated ${META.updated}`}
+      statusLabel={`Profound · ${META.updated}`}
+      crossLinks={[
+        { href: "/90-day-attack-plan", label: "90-Day Attack Plan →" },
+        { href: "https://gepromed.com", label: "gepromed.com ↗", external: true },
+      ]}
+    >
+      {tab === "overview" && <Overview leaderboardMax={leaderboardMax} gapTopic={gapTopic} />}
+      {tab === "visibility" && <Visibility modelMax={modelMax} topicMax={topicMax} />}
+      {tab === "citations" && <Citations />}
+      {tab === "competitors" && <Competitors leaderboardMax={leaderboardMax} />}
+      {tab === "organic" && <Organic />}
+    </CommandShell>
   );
 }
 
@@ -381,6 +207,18 @@ function Overview({
       <SectionTitle title="Two different search games" sub="AI answers vs. classic Google organic — see the Organic & Search tab for the full breakdown." />
       <article className={`${styles.card} ${styles.cardPad}`}>
         <p style={{ color: "var(--ink-2)", fontSize: "13px", lineHeight: 1.6 }}>{ORGANIC_INSIGHT}</p>
+      </article>
+
+      <SectionTitle title="What's next" sub="The 90-day plan to close the DPC gap and build a real organic base." />
+      <article className={`${styles.card} ${styles.cardPad}`}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+          <p style={{ color: "var(--ink-2)", fontSize: "13px", margin: 0, maxWidth: 620 }}>
+            Content cadence, backlink program and phased KPI targets for the next 90 days — see the 90-Day Attack Plan.
+          </p>
+          <a className={styles.control} href="/90-day-attack-plan">
+            Open plan →
+          </a>
+        </div>
       </article>
     </section>
   );
