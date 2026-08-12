@@ -55,7 +55,7 @@ export default function OrganicReportingPage() {
   return (
     <CommandShell
       brandTitle="Growth Command"
-      brandSubtitle="Gepromed · Organic reporting"
+      brandSubtitle="Organic reporting"
       tabs={TABS}
       activeTab={tab}
       onTabChange={(id) => setTab(id as TabId)}
