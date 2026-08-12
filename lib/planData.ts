@@ -1,6 +1,6 @@
 /* Gepromed — 90-Day Attack Plan — data layer.
  *
- * Baselines below are the real Day-0 numbers already on the GEO Command
+ * Baselines below are the real Day-0 numbers already on the Growth Command
  * Center (see lib/organicData.ts) — this file doesn't invent metrics, it
  * targets the ones already tracked. Cadence targets (off-page/on-page blogs,
  * Reddit mentions, manual/automated backlinks) are the brief as given;

@@ -1,6 +1,6 @@
 "use client";
 
-/* Shared presentational pieces for both dashboard pages (GEO Command Center
+/* Shared presentational pieces for both dashboard pages (Growth Command Center
  * and the 90-Day Attack Plan). Pulled out of app/page.tsx so a second page
  * doesn't have to reimplement KPI cards, sparklines, section headers, etc.
  * Both pages import styles from the same app/page.module.css design system.
