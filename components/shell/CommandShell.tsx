@@ -2,7 +2,7 @@
 
 /* Shared app shell for both dashboard pages: sidebar nav, topbar with search,
  * theme toggle, and the in-page [data-search] filter behavior. Extracted so
- * GEO Command Center (/) and the 90-Day Attack Plan (/90-day-attack-plan)
+ * Growth Command Center (/) and the 90-Day Attack Plan (/90-day-attack-plan)
  * look and behave identically without duplicating this ~150-line wrapper.
  */
 

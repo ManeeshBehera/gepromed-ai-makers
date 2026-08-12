@@ -26,7 +26,7 @@ export default function AttackPlanPage() {
       missionMeta={`Baseline ${META.updated} · rank #1 AI visibility`}
       statusLabel="Growth program · 3 phases"
       crossLinks={[
-        { href: "/", label: "← GEO Command Center" },
+        { href: "/", label: "← Growth Command Center" },
         { href: "https://gepromed.com", label: "gepromed.com ↗", external: true },
       ]}
     >
@@ -44,7 +44,7 @@ function CadenceBrief() {
           <h1>90-Day Attack Plan</h1>
           <p>
             The steady-state content and backlink cadence every phase below ramps toward, and the three checkpoints —
-            30, 60 and 90 days — that track it against the real baseline already on the GEO Command Center.
+            30, 60 and 90 days — that track it against the real baseline already on the Growth Command Center.
           </p>
         </div>
       </div>

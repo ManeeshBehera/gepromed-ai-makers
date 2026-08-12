@@ -54,7 +54,7 @@ export default function OrganicReportingPage() {
 
   return (
     <CommandShell
-      brandTitle="GEO Command"
+      brandTitle="Growth Command"
       brandSubtitle="Gepromed · Organic reporting"
       tabs={TABS}
       activeTab={tab}
