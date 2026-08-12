@@ -117,6 +117,7 @@
 .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); min-width: 0; }
 .cardPad { padding: 20px; }
 .cardHead { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
@@ -217,7 +218,7 @@
 .pullRow p { margin: 2px 0 0; font-size: 11px; color: var(--ink-3); }
 
 @media (max-width: 1120px) {
-  .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid4, .grid5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero { grid-template-columns: 1fr; }
   .heroSide { border-left: 0; border-top: 1px solid var(--line); }
   .categoryGrid { grid-template-columns: 1fr; }
@@ -233,7 +234,7 @@
   .content { padding: 20px 14px 36px; }
   .status, .profile { display: none; }
   .search { width: auto; flex: 1; }
-  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  .grid2, .grid3, .grid4, .grid5 { grid-template-columns: 1fr; }
   .pageHead { display: block; }
   .pageActions { justify-content: flex-start; margin-top: 14px; }
   .heroFlow { grid-template-columns: repeat(2, 1fr); }
