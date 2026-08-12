@@ -1,22 +1,24 @@
-# Gepromed — Website Demo (redesign & rebranding)
+# Gepromed — GEO Command Center
 
-A demo of a restructured, rebranded **Gepromed** website with an **enhanced training
-registration** workflow. Built with **Next.js (App Router) + TypeScript + Tailwind CSS**.
-Bilingual **FR / EN**. No AI.
+Internal AI-visibility and organic-search reporting for Gepromed. Single page (`app/page.tsx`),
+same design language as the Sage "GEO Command Center" reference dashboard, rebuilt with
+Next.js (App Router) + TypeScript and a self-contained CSS Module — no Tailwind/UI kit
+dependency on this page, no marketing site attached.
 
 ## What's inside
 
-- **Rebranded marketing site** — home with storytelling + real Gepromed KPIs, specialties,
-  About / mission / Qualiopi & quality, contact (with the real Strasbourg addresses).
-- **Trainings** — catalogue with **upcoming vs past** sessions, specialty filters, capacity
-  ("spots left"), and **proof** on past sessions (satisfaction %, pass rate, photos).
-- **Enhanced registration** — captures an interested person as a **lead before payment**,
-  with pre-training **logistics** (dietary, arrival, accommodation, e-learning access).
-- **Organizer space (dashboard)** — shared pipeline of every request:
-  `lead → deposit paid → contract signed → confirmed`, with follow-up notes. This is the
-  capability Nicole flagged as missing today.
-- **Shared server store** — registrations persist server-side via a small JSON-backed store
-  and a REST API (`/api/registrations`), so leads are visible across devices/visitors.
+Five tabs, real data throughout — see `lib/organicData.ts` for exactly which numbers are
+live API pulls vs. editorial framing:
+
+- **Overview** — north-star AI-visibility trend, per-topic breakdown, and the standout
+  finding: AI-answer visibility vs. classic Google organic are two very different pictures.
+- **AI Visibility** — Profound pull for the "Formation médicale et chirurgicale" category:
+  visibility by model and by topic, the full competitor leaderboard, sentiment.
+- **Citations** — which domains AI engines actually cite, ranked by citation share.
+- **Competitors** — the tracked rival set with visibility/position from Profound.
+- **Organic & Search** — real Ahrefs (`*.gepromed.com/*`) and Google Search Console exports.
+  Falls back to an explicit pull-list (with a "Copy pull list" button) if `AHREFS_READY` /
+  `GSC_READY` in `lib/organicData.ts` are ever flipped back to `false`.
 
 ## Run locally
 
@@ -29,42 +31,29 @@ npm run dev      # http://localhost:3000
 npm run build && npm run start   # production
 ```
 
-## Deploy on Render
+## Deploy
 
-This repo includes a `render.yaml` blueprint (Web Service, Node runtime).
+Deployed on Vercel — import the repo, Next.js is auto-detected, no config needed.
 
-1. Push the branch (already done).
-2. In Render: **New + → Blueprint**, connect this repository, pick the branch.
-3. Render runs `npm install && npm run build` then `npm run start`.
+## Refreshing the data
 
-Manual setup (without the blueprint): **New + → Web Service**, Build `npm install && npm run build`,
-Start `npm run start`, Node 22.
+`lib/organicData.ts` is hand-updated, not generated. To refresh:
 
-> On Render's free plan the filesystem is ephemeral, so the demo registration data resets on
-> redeploy and re-seeds automatically. For durable storage, point `DATA_DIR` at a Render Persistent
-> Disk or swap the store in `lib/server/store.ts` for a database.
-
-## Brand colors
-
-The palette is an **approximation** of gepromed.com (medical azure blue + orange-style accent),
-centralized in `tailwind.config.ts` (`brand` scale + `accent`). Swap in the exact brand hex there
-in one place.
+- **Profound**: re-run `list_prompts` / `get_visibility_report` / `get_citations_report` /
+  `get_sentiment_report` against category `831e7990-4ce0-46cd-a5a0-7a8bbe874063` and replace
+  the relevant constants.
+- **Ahrefs / GSC**: re-pull the exports listed in `ORGANIC_PULL_LIST` and replace the
+  `AHREFS_*` / `GSC_*` constants (or flip `AHREFS_READY` / `GSC_READY` to `false` to fall
+  back to the pull-list view in the meantime).
 
 ## Project structure
 
 ```
 app/
-  page.tsx               Home
-  trainings/             Catalogue + [slug] detail
-  register/              Registration flow (Suspense → RegisterFlow)
-  dashboard/             Organizer pipeline
-  about/  contact/
-  api/registrations/     REST API (GET/POST, PATCH/DELETE by id)
-components/               Header, Footer, cards, views, RegisterFlow
+  page.tsx        The dashboard (all 5 tabs)
+  page.module.css Design system — tokens, components, light/dark theme
+  layout.tsx      Minimal root layout, page metadata
+  globals.css     Tailwind directives + a bare body reset
 lib/
-  i18n.tsx               FR/EN provider + dictionary
-  trainings.ts           Bilingual session data + helpers
-  types.ts               Registration + lead-status model
-  api.ts                 Client fetch helpers
-  server/store.ts        File-backed shared store
+  organicData.ts  All dashboard data — documents live pulls vs. framing
 ```
