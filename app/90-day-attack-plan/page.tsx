@@ -18,7 +18,7 @@ export default function AttackPlanPage() {
   return (
     <CommandShell
       brandTitle="90-Day Attack Plan"
-      brandSubtitle="Gepromed · Growth program"
+      brandSubtitle="Growth program"
       tabs={TABS}
       activeTab={tab}
       onTabChange={(id) => setTab(id as PhaseId)}

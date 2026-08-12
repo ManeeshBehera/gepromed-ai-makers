@@ -76,7 +76,7 @@ export function CommandShell({
       <div className={styles.app}>
         <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ""}`}>
           <div className={styles.brand}>
-            <div className={styles.brandMark}>G</div>
+            <img className={styles.brandLogoImg} src="/gepromed-logo.png" alt="Gepromed" />
             <div>
               <strong>{brandTitle}</strong>
               <span>{brandSubtitle}</span>
@@ -145,6 +145,13 @@ export function CommandShell({
             <button className={styles.topAction} aria-label="Switch theme" onClick={toggleTheme} title="Switch theme">
               {theme === "dark" ? "☀" : "☾"}
             </button>
+            <div className={styles.profile}>
+              <img className={styles.avatar} src="/aimakers-mark.png" alt="AI Makers" />
+              <div>
+                <strong>AI Makers</strong>
+                <span>Growth partner</span>
+              </div>
+            </div>
           </header>
 
           <div className={styles.content} ref={contentRef}>
