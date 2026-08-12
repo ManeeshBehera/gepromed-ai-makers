@@ -8,6 +8,13 @@
  * the one zero-visibility Profound topic (DPC financing), and the GSC
  * queries that rank with real impressions but convert at or near zero
  * clicks (esvb, explants, MSICS/phaco, vitrectomie).
+ *
+ * LinkedIn workstream (added after the initial brief): company-page
+ * takeover in month 1, personal-account onboarding + posting automation
+ * in month 2, engagement maximization + LinkedIn Ads for conversion in
+ * month 3. No LinkedIn follower/impression baseline exists yet — every
+ * LinkedIn row below is marked "Not tracked" / "Not owned" rather than a
+ * guessed number, same honesty rule as the Ahrefs/GSC data.
  */
 
 export type Baseline = {
@@ -86,12 +93,13 @@ export const PHASES: Phase[] = [
     window: "Day 1–30 · Foundation",
     headline: "Stand up the production pipeline and ship the single highest-leverage fix.",
     objective:
-      "Build the editorial calendar, backlink prospect list and Reddit presence at a ramping cadence (not full speed yet — the pipeline has to exist before it can run at 5 off-page posts a week). In parallel, ship the one fix the dashboard already flags as highest-leverage: a dedicated DPC-financing page, since \"DPC et financement de la formation chirurgicale\" is the only topic where Gepromed has zero tracked AI visibility. Close two more on-page gaps where Gepromed already ranks with real impressions but converts at or near zero clicks (esvb, explants).",
+      "Build the editorial calendar, backlink prospect list and Reddit presence at a ramping cadence (not full speed yet — the pipeline has to exist before it can run at 5 off-page posts a week). In parallel, ship the one fix the dashboard already flags as highest-leverage: a dedicated DPC-financing page, since \"DPC et financement de la formation chirurgicale\" is the only topic where Gepromed has zero tracked AI visibility. Close two more on-page gaps where Gepromed already ranks with real impressions but converts at or near zero clicks (esvb, explants). On LinkedIn, take over the Gepromed company page and start organic posting — the goal this month is warming the account up and reading what actually gets a reaction, not scale.",
     heroKpis: [
       { label: "On-page blogs shipped", value: "6–8", sub: "1–2/week ramp, weeks 1–4", tone: "good", delta: "Ramp" },
       { label: "Off-page blogs placed", value: "10–12", sub: "2–3/week ramp, 3 seed partners", tone: "good", delta: "Ramp" },
       { label: "DPC visibility", value: "0% → 1st mention", sub: "Pillar page ships week 1", tone: "bad", delta: "P1" },
       { label: "AI visibility held", value: "≥42.9%", sub: "Defend #1 while shipping changes", tone: "good", delta: "Defend" },
+      { label: "Gepromed LinkedIn", value: "Live", sub: "Admin taken over, organic warm-up posting begins", tone: "good", delta: "Kickoff" },
     ],
     kpiTable: [
       { metric: "Off-page blogs", baseline: "0", target: "10–12 cumulative", type: "Activity" },
@@ -99,18 +107,24 @@ export const PHASES: Phase[] = [
       { metric: "Reddit mentions", baseline: "0", target: "3+ cumulative", type: "Activity" },
       { metric: "Manual backlinks (DR20+)", baseline: "0", target: "5+ cumulative", type: "Activity" },
       { metric: "Automated backlinks", baseline: "0", target: "10+ cumulative", type: "Activity" },
+      { metric: "Gepromed LinkedIn — admin access", baseline: "Not owned", target: "Taken over, posting live", type: "Activity" },
+      { metric: "Gepromed LinkedIn — posts published", baseline: "0", target: "12–16 (3–4/week warm-up)", type: "Activity" },
       { metric: "AI visibility (Profound)", baseline: "42.9%", target: "Hold ≥42.9%, rank #1", type: "Outcome" },
       { metric: "DPC financing topic visibility", baseline: "0%", target: "First tracked mention", type: "Outcome" },
       { metric: "Organic keywords (Ahrefs)", baseline: "2", target: "5+", type: "Outcome" },
       { metric: "Domain Rating", baseline: "15", target: "15–16 (early signal only)", type: "Outcome" },
+      { metric: "Gepromed LinkedIn — content signal", baseline: "Not tracked", target: "Top 3 performing formats/topics identified", type: "Outcome" },
     ],
     actions: [
       { title: "Publish the DPC-financing pillar page", detail: "Target \"financement DPC formation chirurgicale\" — the only 0%-visibility topic on the dashboard. Pitch agencedpc.fr as a syndication/partnership target once live.", priority: "P1" },
       { title: "Build the backlink prospect list", detail: "40+ DR20+ medical, education and association domains — French medical societies, CHU pages, Qualiopi directories.", priority: "P1" },
       { title: "Stand up the off-page syndication pipeline", detail: "Lock 3 seed publications/partners for a steady weekly off-page slot, starting with the domains already citing Gepromed's category: college-vasculaire.com, agencedpc.fr, escrs.org.", priority: "P1" },
       { title: "Create the Reddit presence", detail: "Verified account, warm-up participation in r/medicine, r/surgery, r/ophthalmology and r/medecine before any promotional posting.", priority: "P1" },
+      { title: "Take over the Gepromed LinkedIn company page", detail: "Secure admin access and audit the existing follower base and posting history before publishing anything new.", priority: "P1" },
+      { title: "Start LinkedIn organic warm-up posting", detail: "3–4 posts/week across formats (text, carousel, short video). This month is about reading reaction, not chasing scale.", priority: "P1" },
       { title: "Ship the two clearest on-page fixes", detail: "\"esvb\" (189 impressions, position 4.41, 2 clicks) and \"analyse d'explants vasculaires\" (103 combined impressions, 0 clicks) — both already rank, neither is optimized.", priority: "P2" },
       { title: "Turn on automated backlink submissions", detail: "Healthcare directories, Qualiopi-certified training registries, conference aggregators.", priority: "P2" },
+      { title: "Log LinkedIn content-reaction data", detail: "Track which topics and formats actually get engagement — this becomes the direct input for month 2's automation pipeline and content calendar.", priority: "P2" },
       { title: "Lock the month 2–3 editorial calendar", detail: "So on-page cadence can jump straight to 2–3/week in month 2 with no gap.", priority: "P2" },
     ],
     content: [
@@ -120,6 +134,7 @@ export const PHASES: Phase[] = [
       { channel: "On-page blog", cadence: "Week 4", target: "MSICS vs phacoémulsification : quelle formation choisir", rationale: "36 + 22 + 19 impressions across related queries, 0 clicks" },
       { channel: "Off-page blog", cadence: "2–3/week", target: "college-vasculaire.com, agencedpc.fr, escrs.org", rationale: "Rank #4–6 in citation share for this category, zero Gepromed backlinks today" },
       { channel: "Reddit", cadence: "Seed", target: "r/medicine, r/surgery, r/medecine — supervisor-led intro thread", rationale: "Warm-up before any promotional posting; Reddit content is heavily cited by AI engines" },
+      { channel: "LinkedIn (company)", cadence: "3–4/week", target: "Gepromed company page — organic warm-up mix", rationale: "Read what topics/formats get real reaction before scaling or automating in month 2" },
       { channel: "Manual backlink", cadence: "5+/month", target: "French medical societies, CHU partner pages, Qualiopi directories", rationale: "DR20+ requirement met by teaching-hospital and association domains" },
       { channel: "Automated backlink", cadence: "10+/month", target: "Healthcare directories, training registries, conference aggregators", rationale: "Lowest-effort volume channel — turn on early, let it run" },
     ],
@@ -131,12 +146,13 @@ export const PHASES: Phase[] = [
     window: "Day 31–60 · Full cadence",
     headline: "Hit full steady-state velocity and start compounding month 1's backlinks.",
     objective:
-      "Every channel moves to its steady-state cadence — 5 off-page posts a week, 2–3 on-page, and Reddit/backlink volume ramping to the brief's monthly targets. On-page content extends to the remaining beachhead gaps (vitrectomy, phaco training), and month 1's backlink placements get their first impact review: which DR20+ links actually moved rankings, and which don't get renewed.",
+      "Every channel moves to its steady-state cadence — 5 off-page posts a week, 2–3 on-page, and Reddit/backlink volume ramping to the brief's monthly targets. On-page content extends to the remaining beachhead gaps (vitrectomy, phaco training), and month 1's backlink placements get their first impact review: which DR20+ links actually moved rankings, and which don't get renewed. On LinkedIn, bring in the internal team — Nicole, Wissal and Juliette's personal accounts join the company page — and stand up the automation pipeline (research → trend → post creation → posting) plus a shared content calendar, so the team isn't hand-crafting every post. Start testing growth loops rather than committing to one untested approach, and get LinkedIn Ads built (not yet live) for training and engineering conversion.",
     heroKpis: [
       { label: "On-page blogs (cumulative)", value: "16–18", sub: "Full 2–3/week from week 5", tone: "good", delta: "Full pace" },
       { label: "Off-page blogs (cumulative)", value: "~30", sub: "Full 5/week from week 5", tone: "good", delta: "Full pace" },
       { label: "Domain Rating", value: "18–20", sub: "From 15 baseline", tone: "good", delta: "+3–5" },
       { label: "ChatGPT visibility", value: "32%+", sub: "From 26.0% baseline — weakest engine", tone: "warn", delta: "Close gap" },
+      { label: "LinkedIn accounts live", value: "4", sub: "Company + Nicole, Wissal, Juliette — automation pipeline running", tone: "good", delta: "Scaling" },
     ],
     kpiTable: [
       { metric: "Off-page blogs", baseline: "10–12 (Day 30)", target: "~30 cumulative", type: "Activity" },
@@ -144,6 +160,11 @@ export const PHASES: Phase[] = [
       { metric: "Reddit mentions", baseline: "3+ (Day 30)", target: "8+ cumulative", type: "Activity" },
       { metric: "Manual backlinks (DR20+)", baseline: "5+ (Day 30)", target: "15+ cumulative", type: "Activity" },
       { metric: "Automated backlinks", baseline: "10+ (Day 30)", target: "30+ cumulative", type: "Activity" },
+      { metric: "Personal LinkedIn accounts onboarded", baseline: "0 (Day 30)", target: "3 — Nicole, Wissal, Juliette", type: "Activity" },
+      { metric: "LinkedIn posting automation", baseline: "Manual (Day 30)", target: "Live — research → trend → creation → posting", type: "Activity" },
+      { metric: "Shared LinkedIn content calendar", baseline: "None", target: "Built, covering company + 3 personal accounts", type: "Activity" },
+      { metric: "LinkedIn growth-loop experiments", baseline: "0", target: "2–3 tested", type: "Activity" },
+      { metric: "LinkedIn Ads setup (training + engineering)", baseline: "Not started", target: "Account + campaigns built, not yet live", type: "Activity" },
       { metric: "Domain Rating", baseline: "15", target: "18–20", type: "Outcome" },
       { metric: "Referring domains", baseline: "221 (109 → homepage only)", target: "240+, spread beyond the homepage", type: "Outcome" },
       { metric: "ChatGPT visibility", baseline: "26.0%", target: "32%+", type: "Outcome" },
@@ -153,9 +174,14 @@ export const PHASES: Phase[] = [
       { title: "Scale off-page to full 5/week", detail: "Add 3 more syndication partners beyond the month-1 seed set to sustain volume without quality loss.", priority: "P1" },
       { title: "Scale on-page to 2–3/week on remaining gaps", detail: "Consolidate the vitrectomie query family (vitrectomie, vitréotome, vitrectomie antérieure — several 0-click variants at positions 8–90) and phacoemulsification training/course (41 combined impressions, 0 clicks, position ~16) into two authoritative pages.", priority: "P1" },
       { title: "Run the first backlink-impact review", detail: "Audit which month-1 DR20+ placements actually moved keyword rankings or DR. Double down on what worked, drop what didn't.", priority: "P1" },
+      { title: "Onboard Nicole, Wissal and Juliette's personal LinkedIn accounts", detail: "Bring the internal team in as the second wave of LinkedIn presence, alongside the company page.", priority: "P1" },
+      { title: "Build the research → trend → post-creation → posting pipeline", detail: "Automate the repeatable parts of the LinkedIn cycle so cadence doesn't depend on someone remembering to do it.", priority: "P1" },
+      { title: "Build the shared LinkedIn content calendar", detail: "One calendar covering the company page and all three personal accounts, informed by month 1's reaction data.", priority: "P1" },
       { title: "Move Reddit from seeding to sustained weekly participation", detail: "Plus one supervisor-led AMA in r/surgery or r/medicine.", priority: "P1" },
+      { title: "Run 2–3 LinkedIn growth-loop experiments", detail: "Test distinct mechanics — employee amplification, comment-engagement pods, a thought-leadership series — rather than committing to one approach untested.", priority: "P2" },
       { title: "Pitch content partnerships to the citation-gap domains", detail: "college-vasculaire.com and helpmesee.org both cite Gepromed's category heavily but not Gepromed itself.", priority: "P2" },
       { title: "Expand automated backlinks to English-language directories", detail: "The /en pages already pull real US/UK GSC impressions — give them the same automated-link support as the French pages.", priority: "P2" },
+      { title: "Stand up LinkedIn Ads for conversion", detail: "Build campaigns targeting training and engineering audiences now, so they're ready to launch in month 3 once the page has real organic activity behind it.", priority: "P2" },
     ],
     content: [
       { channel: "On-page blog", cadence: "2–3/week", target: "Vitrectomie : indications et formation pratique (consolidated)", rationale: "5+ query variants, all 0-click, positions 8–90 — one authoritative page beats five thin ones" },
@@ -163,6 +189,8 @@ export const PHASES: Phase[] = [
       { channel: "On-page blog", cadence: "2–3/week", target: "Refresh: Bootcamp et simulation vasculaire, Congrès ESVB", rationale: "Already-strong Profound topics (74% and 34% visibility) — defend the lead, don't just chase gaps" },
       { channel: "Off-page blog", cadence: "5/week", target: "English-language surgical-education platforms", rationale: "Supports /en pages already surfacing in US/UK GSC impressions" },
       { channel: "Reddit", cadence: "Weekly + 1 AMA", target: "r/surgery or r/medicine — supervisor AMA", rationale: "Sustained presence past the seeding phase" },
+      { channel: "LinkedIn (personal)", cadence: "Per calendar", target: "Nicole, Wissal, Juliette — thought-leadership + expertise-led posts", rationale: "Second wave, built on month 1's Gepromed-page reaction data" },
+      { channel: "LinkedIn Ads", cadence: "Setup", target: "Conversion campaigns — training, engineering", rationale: "Built this month so they're ready to launch once organic activity is established" },
       { channel: "Manual backlink", cadence: "10+/month", target: "French medical schools, CHU partnership pages", rationale: "Same DR20+ bar, deeper into academic/teaching-hospital network" },
       { channel: "Automated backlink", cadence: "20+/month", target: "English-language directories", rationale: "Extends automated volume to match /en organic demand" },
     ],
@@ -174,12 +202,13 @@ export const PHASES: Phase[] = [
     window: "Day 61–90 · Compound & prove ROI",
     headline: "Sustain full cadence, consolidate the gains, and report the 90-day delta.",
     objective:
-      "Hold every channel at the brief's steady-state cadence for the full month. Consolidate three months of content and backlinks into a measurable shift away from 96%-branded organic traffic, defend and extend the #1 AI-visibility rank, and close the quarter with a full re-pull of every metric on this dashboard against the Day-0 baseline — the retrospective that sets next quarter's targets.",
+      "Hold every channel at the brief's steady-state cadence for the full month. Consolidate three months of content and backlinks into a measurable shift away from 96%-branded organic traffic, defend and extend the #1 AI-visibility rank, and close the quarter with a full re-pull of every metric on this dashboard against the Day-0 baseline — the retrospective that sets next quarter's targets. On LinkedIn, stop testing and maximize engagement using what months 1–2 actually proved worked: scale the winning formats on the company page (scored on impressions and follower growth) and across Nicole, Wissal and Juliette's personal accounts (scored on followership gain with high engagement, not just reach). LinkedIn Ads go live for training and engineering conversion — the direct sales lever this quarter has been building toward.",
     heroKpis: [
       { label: "AI visibility", value: "48%+", sub: "From 42.9% — defend #1, extend the lead", tone: "good", delta: "Extend" },
       { label: "Domain Rating", value: "22–25", sub: "From 15 baseline", tone: "good", delta: "+7–10" },
       { label: "Organic keywords", value: "20+", sub: "From 2 baseline", tone: "good", delta: "10x" },
       { label: "Branded click share", value: "<85%", sub: "From 95.7% of disclosed GSC clicks", tone: "warn", delta: "Diversify" },
+      { label: "LinkedIn Ads live", value: "2 campaigns", sub: "Conversion — training + engineering", tone: "good", delta: "Launch" },
     ],
     kpiTable: [
       { metric: "Off-page blogs", baseline: "~30 (Day 60)", target: "55–60 cumulative", type: "Activity" },
@@ -187,6 +216,7 @@ export const PHASES: Phase[] = [
       { metric: "Reddit mentions", baseline: "8+ (Day 60)", target: "15+ cumulative (>5/mo sustained)", type: "Activity" },
       { metric: "Manual backlinks (DR20+)", baseline: "15+ (Day 60)", target: "30+ cumulative (>10/mo sustained)", type: "Activity" },
       { metric: "Automated backlinks", baseline: "30+ (Day 60)", target: "60+ cumulative (>20/mo sustained)", type: "Activity" },
+      { metric: "LinkedIn Ads — conversion campaigns", baseline: "Built, not live (Day 60)", target: "Live and optimized, training + engineering", type: "Activity" },
       { metric: "AI visibility (Profound)", baseline: "42.9%", target: "48%+, rank #1 held", type: "Outcome" },
       { metric: "DPC financing topic visibility", baseline: "0%", target: "Positive and tracked", type: "Outcome" },
       { metric: "ChatGPT visibility", baseline: "26.0%", target: "38%+", type: "Outcome" },
@@ -194,18 +224,26 @@ export const PHASES: Phase[] = [
       { metric: "Referring domains", baseline: "221 (109 → homepage only)", target: "270+, measurable spread beyond the homepage", type: "Outcome" },
       { metric: "Organic keywords (Ahrefs)", baseline: "2", target: "20+", type: "Outcome" },
       { metric: "Branded share of disclosed GSC clicks", baseline: "95.7%", target: "<85%", type: "Outcome" },
+      { metric: "Gepromed LinkedIn — impressions + followers", baseline: "Month 1–2 read", target: "Measurable upward trend", type: "Outcome" },
+      { metric: "Personal LinkedIn accounts — followers + engagement", baseline: "Month 2 onboarding", target: "Followership gain with high engagement, all 3", type: "Outcome" },
     ],
     actions: [
       { title: "Run the full 90-day retrospective", detail: "Re-pull Ahrefs (DR, keywords, referring domains) and the GSC export; compare line-by-line against the Day-0 baseline on this dashboard.", priority: "P1" },
       { title: "Re-run the Profound category pull", detail: "Confirm the #1 rank held, quantify the visibility gain, and confirm the DPC topic moved off zero.", priority: "P1" },
       { title: "Identify the highest-ROI backlink placements", detail: "From the month-2 impact review — renew and expand specifically those partnerships for next quarter rather than spreading evenly.", priority: "P1" },
+      { title: "Maximize LinkedIn engagement using month-2 learnings", detail: "Double down on whichever formats, topics and accounts actually drove reach and engagement across the growth-loop experiments — stop testing, follow the data.", priority: "P1" },
+      { title: "Launch and optimize LinkedIn Ads conversion campaigns", detail: "Training and engineering audiences — the target is measurable conversion/sales lift, not just impressions.", priority: "P1" },
+      { title: "Report company vs. personal LinkedIn KPIs separately", detail: "Company page: impressions and follower growth. Personal accounts: followership gain with high engagement — different goals, different scorecards.", priority: "P2" },
       { title: "Publish a visibility recap piece", detail: "\"State of AI + organic visibility\" — a natural off-page and Reddit share candidate in its own right, and proof of the program's ROI.", priority: "P2" },
-      { title: "Set next-quarter targets from what actually worked", detail: "Not from the original brief's assumptions — from the 90 days of real placement and ranking data.", priority: "P2" },
+      { title: "Set next-quarter targets from what actually worked", detail: "Not from the original brief's assumptions — from the 90 days of real placement, ranking and LinkedIn engagement data.", priority: "P2" },
     ],
     content: [
       { channel: "On-page blog", cadence: "2–3/week", target: "Final beachhead-topic refreshes + DPC FAQ update", rationale: "DPC page updated with the real applicant questions surfaced in months 1–2" },
       { channel: "Off-page blog", cadence: "5/week", target: "Renew top 2 performing partners from the Day-60 review", rationale: "Concentrate volume on the placements the retrospective proves move rankings" },
       { channel: "Reddit", cadence: ">5/month sustained", target: "Weekly participation + second AMA if the first performed", rationale: "Steady-state, not a one-off campaign" },
+      { channel: "LinkedIn (company)", cadence: "Steady-state", target: "Best-performing formats from month 2, scaled", rationale: "KPI: impressions + follower growth on the Gepromed page" },
+      { channel: "LinkedIn (personal)", cadence: "Steady-state", target: "Nicole, Wissal, Juliette — sustained posting on the winning growth loop(s)", rationale: "KPI: followership gain with high engagement, not just reach" },
+      { channel: "LinkedIn Ads", cadence: "Live", target: "Training + engineering conversion campaigns, optimized", rationale: "Direct conversion/sales lever, the payoff of two months of organic warm-up" },
       { channel: "Manual backlink", cadence: ">10/month sustained", target: "Re-targeted toward the site category with the strongest DR movement", rationale: "Let the Day-60 impact data pick the channel, not the original assumption" },
       { channel: "Automated backlink", cadence: ">20/month sustained", target: "Steady-state across FR + EN directories", rationale: "Maintenance-mode volume channel by this point" },
     ],

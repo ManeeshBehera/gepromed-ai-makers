@@ -84,7 +84,7 @@ function PhaseView({ phase }: { phase: Phase }) {
         </div>
       </div>
 
-      <div className={`${styles.grid} ${styles.grid4}`}>
+      <div className={`${styles.grid} ${phase.heroKpis.length === 5 ? styles.grid5 : styles.grid4}`}>
         {phase.heroKpis.map((k) => (
           <Kpi key={k.label} label={k.label} value={k.value} sub={k.sub} tone={k.tone} delta={k.delta} />
         ))}
